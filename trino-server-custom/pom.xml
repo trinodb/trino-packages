@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.trino</groupId>
+        <artifactId>trino-packages</artifactId>
+        <version>1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>trino-server-custom</artifactId>
+    <packaging>provisio</packaging>
+    <description>Trino - Server custom tarball package</description>
+
+    <properties>
+        <dep.trino.version>472</dep.trino.version>
+        <dep.takari.version>2.2.0</dep.takari.version>
+        <air.check.skip-checkstyle>true</air.check.skip-checkstyle>
+        <air.check.skip-enforcer>false</air.check.skip-enforcer>
+        <air.check.skip-duplicate-finder>true</air.check.skip-duplicate-finder>
+        <air.check.skip-findbugs>true</air.check.skip-findbugs>
+        <air.check.skip-dependency>true</air.check.skip-dependency>
+        <air.check.skip-pmd>true</air.check.skip-pmd>
+        <air.check.skip-spotbugs>true</air.check.skip-spotbugs>
+
+        <!-- Launcher properties -->
+        <main-class>io.trino.server.TrinoServer</main-class>
+        <process-name>${project.artifactId}</process-name>
+
+        <!-- Special consideration for Takari Lifecycle -->
+        <!-- This works as trino-server have no sources (is just provisio packaged) -->
+        <takari.skip>false</takari.skip>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.trino</groupId>
+            <artifactId>trino-server-core</artifactId>
+            <version>${dep.trino.version}</version>
+            <type>tar.gz</type>
+        </dependency>
+        <dependency>
+            <groupId>io.airlift</groupId>
+            <artifactId>junit-extensions</artifactId>
+            <version>2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- Needed for provisio to resolve transitive dependencies for server assembly -->
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
+        </repository>
+    </repositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>ca.vanzyl.provisio.maven.plugins</groupId>
+                <artifactId>provisio-maven-plugin</artifactId>
+                <version>1.1.1</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <outputDirectory>${project.build.directory}/${project.artifactId}-${dep.trino.version}</outputDirectory>
+                </configuration>
+            </plugin>
+            <!-- Maven Central Repository has a 1GB file size limit.
+                Plugin configuration is no relevant if you are not deploying to
+                Maven Central or have a similar requirement.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <configuration>
+                    <rules combine.self="override">
+                        <requireFilesSize>
+                            <maxsize>1073741824</maxsize>
+                            <files>
+                                <file>${project.build.directory}/${project.artifactId}-${dep.trino.version}.tar.gz</file>
+                            </files>
+                        </requireFilesSize>
+                    </rules>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <phase>verify</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>io.takari.maven.plugins</groupId>
+                <artifactId>takari-lifecycle-plugin</artifactId>
+                <version>${dep.takari.version}</version>
+                <configuration>
+                    <proc>none</proc>
+                    <skip>${takari.skip}</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,305 @@
+<runtime>
+    <!-- Target -->
+    <archive name="${project.artifactId}-${dep.trino.version}.tar.gz" hardLinkIncludes="**/*.jar" />
+
+    <!-- Add any files found in source main resources to the root of the tarball
+         You can modify the current files, add further configuration files and 
+         even add directories with additional files, for example custom plugins.
+    -->
+    <fileSet to="/">
+        <directory path="${basedir}/src/main/resources/"/>
+    </fileSet>
+
+   <!-- Expand on top of trino-server-core 
+        Optionally exclude any plugins and other files that you dont want to
+        include in the custom distribution. These exclusions require intricate
+        knowledge of Trino and the artifacts you are potentially removing.
+   -->
+    <artifactSet to="">
+        <artifact id="${project.groupId}:trino-server-core:tar.gz:${dep.trino.version}">
+            <unpack excludes="bin/*ppc*,plugin/ml*,plugin/geospatial*"/>
+        </artifact>
+    </artifactSet>
+
+    <!-- Plugins 
+
+    Comment out any plugin you don't want to include in the custom distribution
+    and uncomment the ones you want to include.
+    -->
+
+    <artifactSet to="plugin/ai-functions">
+        <artifact id="${project.groupId}:trino-ai-functions:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet>
+    
+<!--     <artifactSet to="plugin/apache-ranger">
+        <artifact id="${project.groupId}:trino-ranger:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/bigquery">
+        <artifact id="${project.groupId}:trino-bigquery:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+    <artifactSet to="plugin/blackhole">
+        <artifact id="${project.groupId}:trino-blackhole:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet>
+
+<!--     <artifactSet to="plugin/cassandra">
+        <artifact id="${project.groupId}:trino-cassandra:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/clickhouse">
+        <artifact id="${project.groupId}:trino-clickhouse:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/delta-lake">
+        <artifact id="${project.groupId}:trino-delta-lake:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+        <artifact id="${project.groupId}:trino-hdfs:zip:${dep.trino.version}">
+            <unpack useRoot="true" />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/druid">
+        <artifact id="${project.groupId}:trino-druid:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/duckdb">
+        <artifact id="${project.groupId}:trino-duckdb:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/elasticsearch">
+        <artifact id="${project.groupId}:trino-elasticsearch:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/exasol">
+        <artifact id="${project.groupId}:trino-exasol:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+    <artifactSet to="plugin/faker">
+        <artifact id="${project.groupId}:trino-faker:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet>
+
+<!--     <artifactSet to="plugin/google-sheets">
+        <artifact id="${project.groupId}:trino-google-sheets:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/hive">
+        <artifact id="${project.groupId}:trino-hive:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+        <artifact id="${project.groupId}:trino-hdfs:zip:${dep.trino.version}">
+            <unpack useRoot="true" />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/http-event-listener">
+        <artifact id="${project.groupId}:trino-http-event-listener:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/hudi">
+        <artifact id="${project.groupId}:trino-hudi:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+        <artifact id="${project.groupId}:trino-hdfs:zip:${dep.trino.version}">
+            <unpack useRoot="true" />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/iceberg">
+        <artifact id="${project.groupId}:trino-iceberg:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+        <artifact id="${project.groupId}:trino-hdfs:zip:${dep.trino.version}">
+            <unpack useRoot="true" />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/ignite">
+        <artifact id="${project.groupId}:trino-ignite:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+    <artifactSet to="plugin/jmx">
+        <artifact id="${project.groupId}:trino-jmx:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet>
+
+<!--     <artifactSet to="plugin/kafka">
+        <artifact id="${project.groupId}:trino-kafka:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/kafka-event-listener">
+        <artifact id="${project.groupId}:trino-kafka-event-listener:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/kudu">
+        <artifact id="${project.groupId}:trino-kudu:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/loki">
+        <artifact id="${project.groupId}:trino-loki:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/mariadb">
+        <artifact id="${project.groupId}:trino-mariadb:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+    <artifactSet to="plugin/memory">
+        <artifact id="${project.groupId}:trino-memory:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet>
+
+<!--     <artifactSet to="plugin/mongodb">
+        <artifact id="${project.groupId}:trino-mongodb:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/mysql">
+        <artifact id="${project.groupId}:trino-mysql:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/mysql-event-listener">
+        <artifact id="${project.groupId}:trino-mysql-event-listener:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/opa">
+        <artifact id="${project.groupId}:trino-opa:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/openlineage">
+        <artifact id="${project.groupId}:trino-openlineage:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/opensearch">
+        <artifact id="${project.groupId}:trino-opensearch:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/oracle">
+        <artifact id="${project.groupId}:trino-oracle:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/pinot">
+        <artifact id="${project.groupId}:trino-pinot:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/postgresql">
+        <artifact id="${project.groupId}:trino-postgresql:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/prometheus">
+        <artifact id="${project.groupId}:trino-prometheus:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/redis">
+        <artifact id="${project.groupId}:trino-redis:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/redshift">
+        <artifact id="${project.groupId}:trino-redshift:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/singlestore">
+        <artifact id="${project.groupId}:trino-singlestore:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/snowflake">
+        <artifact id="${project.groupId}:trino-snowflake:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+<!--     <artifactSet to="plugin/sqlserver">
+        <artifact id="${project.groupId}:trino-sqlserver:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+ <!--    <artifactSet to="plugin/thrift">
+        <artifact id="${project.groupId}:trino-thrift:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+
+    <artifactSet to="plugin/tpcds">
+        <artifact id="${project.groupId}:trino-tpcds:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet>
+
+    <artifactSet to="plugin/tpch">
+        <artifact id="${project.groupId}:trino-tpch:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet>
+
+<!--     <artifactSet to="plugin/vertica">
+        <artifact id="${project.groupId}:trino-vertica:zip:${dep.trino.version}">
+            <unpack />
+        </artifact>
+    </artifactSet> -->
+</runtime>
