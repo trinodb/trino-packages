@@ -28,6 +28,7 @@
     </licenses>
 
     <modules>
+        <module>trino-server-custom</module>
         <module>trino-server-rpm</module>
     </modules>
 
