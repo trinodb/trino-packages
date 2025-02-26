@@ -232,7 +232,7 @@ public class ServerIT
             assertThat(rpmMetadata).extractingByKey("Release").isEqualTo("1");
             assertThat(rpmMetadata).extractingByKey("Version").isEqualTo(getProjectVersion());
             assertThat(rpmMetadata).extractingByKey("Architecture").isEqualTo("noarch");
-            assertThat(rpmMetadata).extractingByKey("License").isEqualTo("Apache License 2.0");
+            assertThat(rpmMetadata).extractingByKey("License").isEqualTo("Apache-2.0");
             assertThat(rpmMetadata).extractingByKey("Group").isEqualTo("Applications/Databases");
             assertThat(rpmMetadata).extractingByKey("URL").isEqualTo("https://trino.io");
         }
