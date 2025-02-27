@@ -44,7 +44,7 @@ The project downloads the tarball of the configured Trino release, adds scripts
 and configurations, and repackages it into an RPM archive.
 
 After a successful build, you find the RPM in the
-`trino-packages/trino-server-rpm` directory with the name
+`trino-packages/trino-server-rpm/target` directory with the name
 `trino-server-rpm-470.noarch.rpm`. The specific version depends on the property
 `dep.trino.version` configured in `trino-packages/trino-server-rpm/pom.xml`.
 
@@ -69,7 +69,7 @@ following steps are necessary:
   the desired Trino version.
 * Check dependency and plugin versions `trino-packages/trino-server-rpm/pom.xml`.
 * Adjust to any build failures.
-* Updated documentation in this `README` file.
+* Update the documentation in this `README.md` file.
 
 ## Installing Trino
 

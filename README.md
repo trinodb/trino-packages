@@ -14,6 +14,16 @@ core Trino project.
 Find more [information about building and using the RPM in the
 documentation](trino-server-rpm/README.md).
 
+## Custom tarball package
+
+Set up for creating a custom `tar.gz` package of Trino built on top of the core
+package available with Trino 472 and newer. The example includes configuration
+files, a limited subset of Trino plugins, and instructions for your own
+customizations.
+
+Find more [information about building and using the custom tarball package in
+the documentation](trino-server-custom/README.md).
+
 ## Potential future additions
 
 The following other package ideas are suitable for implementation in this
