@@ -3,7 +3,8 @@
 A repository for the creation of other binary packages of Trino, beyond the
 default tarball and container images from the main [trino
 repository](https://github.com/trinodb/trino) and documented on the [Trino
-website](https://trino.io).
+website](https://trino.io), specifically the [installation
+documentation](https://trino.io/docs/current/installation.html)
 
 ## RPM package
 
@@ -32,11 +33,6 @@ repository.
 * RPM suitable for different distributions
 * Packages such as apk, deb, and others for other Linux distributions
 * Homebrew or other special packages
-* Example for custom tarball with startup and config scripts included
-* Example for custom tarball with reduced plugin selection
-* Example for custom docker container with subset of plugins
-* Example for custom docker container with different base and other
-  modifications
-* Trino CLI only docker container
+* Docker image with Trino CLI only
 
 [Contributions welcome](.github/CONTRIBUTING.md)!
