@@ -22,7 +22,7 @@
         <air.check.skip-duplicate-finder>true</air.check.skip-duplicate-finder>
         <air.modernizer.java-version>8</air.modernizer.java-version>
 
-        <dep.trino.version>470</dep.trino.version>
+        <dep.trino.version>474</dep.trino.version>
         <server.tar.package>trino-server-${dep.trino.version}</server.tar.package>
         <rpm.skipSigning>true</rpm.skipSigning>
     </properties>

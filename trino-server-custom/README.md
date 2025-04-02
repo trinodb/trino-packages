@@ -49,7 +49,7 @@ characteristics:
 * `ml` functions plugin from `trino-server-core` removed.
 * `geospatial` functions plugin from `trino-server-core` removed.
 
-The project is configured for Trino 472.
+The project is configured for Trino 474.
 
 ## Building
 
