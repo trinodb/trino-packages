@@ -21,7 +21,7 @@ The RPM archive contains the application, all plugins, the necessary default
 configuration files, default setups, and integration with the operating system
 to start as a service.
 
-The project is configured for Trino 470.
+The project is configured for Trino 474.
 
 ## Building
 
