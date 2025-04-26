@@ -22,7 +22,7 @@
         <air.check.skip-duplicate-finder>true</air.check.skip-duplicate-finder>
         <air.modernizer.java-version>8</air.modernizer.java-version>
 
-        <dep.trino.version>474</dep.trino.version>
+        <dep.trino.version>475</dep.trino.version>
         <server.tar.package>trino-server-${dep.trino.version}</server.tar.package>
         <rpm.skipSigning>true</rpm.skipSigning>
     </properties>
@@ -31,7 +31,7 @@
         <dependency>
             <groupId>com.github.docker-java</groupId>
             <artifactId>docker-java-api</artifactId>
-            <version>3.4.1</version>
+            <version>3.5.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -103,9 +103,15 @@
         </dependency>
 
         <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>testcontainers</artifactId>
-            <version>1.20.4</version>
+            <version>1.20.6</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -133,12 +139,10 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.5.2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.5.2</version>
                 </plugin>
             </plugins>
         </pluginManagement>

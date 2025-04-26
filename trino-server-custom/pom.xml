@@ -13,7 +13,7 @@
     <description>Trino - Server custom tarball package</description>
 
     <properties>
-        <dep.trino.version>474</dep.trino.version>
+        <dep.trino.version>475</dep.trino.version>
         <dep.takari.version>2.2.0</dep.takari.version>
         <air.check.skip-checkstyle>true</air.check.skip-checkstyle>
         <air.check.skip-enforcer>false</air.check.skip-enforcer>
@@ -43,6 +43,16 @@
             <groupId>io.airlift</groupId>
             <artifactId>junit-extensions</artifactId>
             <version>2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
