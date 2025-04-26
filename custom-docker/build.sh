@@ -9,7 +9,7 @@ Builds the Trino Docker image
 
 -h       Display help
 -a       Build the specified comma-separated architectures, defaults to amd64,arm64,ppc64le
--r       Trino version, defaults to 474
+-r       Trino version, defaults to 475
 -t       Image tag name, defaults to trino-custom
 EOF
 }
@@ -17,7 +17,7 @@ EOF
 ARCHITECTURES=(amd64 arm64 ppc64le)
 # Set the desires Trino version. This version is also used automatically in the
 # Dockerfile.
-TRINO_VERSION=474
+TRINO_VERSION=475
 TAG_PREFIX=trino-custom
 
 while getopts ":a:r:t:h" o; do
