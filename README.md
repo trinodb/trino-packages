@@ -25,6 +25,29 @@ customizations.
 Find more [information about building and using the custom tarball package in
 the documentation](trino-server-custom/README.md).
 
+## Build
+
+You can build the project with the modules `trino-server-custom` and
+`trino-server-rpm` with the following commands:
+
+```shell
+cd trino-packages
+./mvnw clean install
+```
+
+Including all tests:
+
+```shell
+./mvnw -P ci clean install
+```
+
+More details in the specific module
+[trino-server-custom](trino-server-custom/README.md) and the
+[trino-server-rpm](trino-server-rpm/README.md) README files.
+
+Building the custom Docker image is separate and documented in the
+[custom-docker](custom-docker/README.md) README file.
+
 ## Potential future additions
 
 The following other package ideas are suitable for implementation in this

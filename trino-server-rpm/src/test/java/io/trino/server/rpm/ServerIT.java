@@ -60,7 +60,7 @@ import static org.testcontainers.containers.wait.strategy.Wait.forLogMessage;
 @Execution(CONCURRENT)
 public class ServerIT
 {
-    private static final DockerImageName BASE_IMAGE = DockerImageName.parse("registry.access.redhat.com/ubi9/ubi-minimal:latest");
+    private static final DockerImageName BASE_IMAGE = DockerImageName.parse("redhat/ubi9-minimal:latest");
     private static final DockerArchitecture ARCH = getDockerArchitectureInfo(BASE_IMAGE).imageArch();
 
     private final String rpmHostPath;
@@ -75,8 +75,8 @@ public class ServerIT
             throws Exception
     {
         // Release names as in the https://api.adoptium.net/q/swagger-ui/#/Release%20Info/getReleaseNames
-        testInstall("jdk-23.0.2+7", "/usr/lib/jvm/temurin-23", "23");
-        testUninstall("jdk-23.0.2+7", "/usr/lib/jvm/temurin-23");
+        testInstall("jdk-24.0.2+12", "/usr/lib/jvm/temurin-24", "24");
+        testUninstall("jdk-24.0.2+12", "/usr/lib/jvm/temurin-24");
     }
 
     private void testInstall(String temurinReleaseName, String javaHome, String expectedJavaVersion)

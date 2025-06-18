@@ -14,15 +14,15 @@
     <url>https://trino.io</url>
 
     <properties>
-        <project.build.targetJdk>23</project.build.targetJdk>
-        <air.java.version>23.0.0</air.java.version>
+        <project.build.targetJdk>24</project.build.targetJdk>
+        <air.java.version>24.0.2</air.java.version>
         <air.check.skip-spotbugs>true</air.check.skip-spotbugs>
         <air.check.skip-pmd>true</air.check.skip-pmd>
         <air.check.skip-jacoco>true</air.check.skip-jacoco>
         <air.check.skip-duplicate-finder>true</air.check.skip-duplicate-finder>
         <air.modernizer.java-version>8</air.modernizer.java-version>
 
-        <dep.trino.version>475</dep.trino.version>
+        <dep.trino.version>476</dep.trino.version>
         <server.tar.package>trino-server-${dep.trino.version}</server.tar.package>
         <rpm.skipSigning>true</rpm.skipSigning>
     </properties>
@@ -111,7 +111,7 @@
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>testcontainers</artifactId>
-            <version>1.20.6</version>
+            <version>1.21.3</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -403,6 +403,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>${dep.plugin.surefire.version}</version>
                         <configuration>
                             <systemPropertyVariables>
                                 <rpm>${project.build.directory}/trino-server-rpm-${dep.trino.version}.noarch.rpm</rpm>

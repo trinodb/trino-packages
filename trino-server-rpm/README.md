@@ -21,14 +21,14 @@ The RPM archive contains the application, all plugins, the necessary default
 configuration files, default setups, and integration with the operating system
 to start as a service.
 
-The project is configured for Trino 475.
+The project is configured for Trino 476.
 
 ## Building
 
 The build requirements for the project are identical to Trino build requirements:
 
 * Linux or MacOS
-* Java 23
+* Java 24
 
 Download and extract or clone the repository to work with the `trino-packages`
 directory locally on your machine.

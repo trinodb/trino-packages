@@ -49,7 +49,7 @@ characteristics:
 * `ml` functions plugin from `trino-server-core` removed.
 * `geospatial` functions plugin from `trino-server-core` removed.
 
-The project is configured for Trino 475.
+The project is configured for Trino 476.
 
 ## Building
 
@@ -57,7 +57,7 @@ The build requirements for the project are identical to Trino build
 requirements:
 
 * Linux or MacOS
-* Java 23
+* Java 24
 
 Download and extract or clone the repository to work with the `trino-packages`
 directory locally on your machine.
@@ -84,7 +84,8 @@ After a successful build, you find the tarball in the
 Build the project on any machine, and copy the tarball package from the
 `trino-server-custom/target` directory to the server on which you want to
 install Trino. The server must meet the Trino requirements for the specific
-Trino version, for example Java 23 for Trino 472.
+Trino version, for example Java 23 for Trino 472, or Java 24 for Trino 476 and
+higher.
 
 Find details in the [Trino documentation](https://trino.io/docs/current/installation/deployment.html)
 
