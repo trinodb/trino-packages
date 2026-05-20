@@ -13,7 +13,7 @@
     <description>Trino - Server custom tarball package</description>
 
     <properties>
-        <dep.trino.version>475</dep.trino.version>
+        <dep.trino.version>481</dep.trino.version>
         <dep.takari.version>2.2.0</dep.takari.version>
         <air.check.skip-checkstyle>true</air.check.skip-checkstyle>
         <air.check.skip-enforcer>false</air.check.skip-enforcer>
@@ -33,12 +33,12 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>io.trino</groupId>
-            <artifactId>trino-server-core</artifactId>
-            <version>${dep.trino.version}</version>
-            <type>tar.gz</type>
-        </dependency>
+        <!-- trino-server-core and the plugin zips are no longer published to
+             Maven Central as of Trino 477. They are fetched from the GitHub
+             release by src/main/script/prefetch.sh during the validate phase
+             and installed into the local Maven repository, where provisio then
+             resolves them via the <artifact> entries in
+             src/main/provisio/trino-custom.xml. -->
         <dependency>
             <groupId>io.airlift</groupId>
             <artifactId>junit-extensions</artifactId>
@@ -70,6 +70,30 @@
 
     <build>
         <plugins>
+            <!-- Download trino-server-core and the selected plugin zips from
+                 the Trino GitHub release and install them into the local Maven
+                 repository so the provisio plugin can resolve them by GAV. -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>prefetch-trino-artifacts</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <phase>validate</phase>
+                        <configuration>
+                            <executable>${project.basedir}/src/main/script/prefetch.sh</executable>
+                            <arguments>
+                                <argument>${dep.trino.version}</argument>
+                                <argument>${project.basedir}</argument>
+                                <argument>${project.build.directory}</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>ca.vanzyl.provisio.maven.plugins</groupId>
                 <artifactId>provisio-maven-plugin</artifactId>

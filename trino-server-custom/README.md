@@ -43,13 +43,16 @@ characteristics:
   small workstation.
 * Node configured to act as coordinator and worker to allow single node use.
 * Environment name set to `custom` in `node.properties`.
-* No additional logging configured in `log.properties`.
+* Logging in `log.properties` set to `WARN` for `io.trino` to keep startup
+  output quiet, with `io.trino.server.Server` left at `INFO` so the
+  `======== SERVER STARTED ========` banner is logged once the server is
+  ready to accept queries.
 * Preview Web UI enabled.
 * Launcher script for PPC architecture removed.
 * `ml` functions plugin from `trino-server-core` removed.
 * `geospatial` functions plugin from `trino-server-core` removed.
 
-The project is configured for Trino 475.
+The project is configured for Trino 481.
 
 ## Building
 
@@ -57,7 +60,7 @@ The build requirements for the project are identical to Trino build
 requirements:
 
 * Linux or MacOS
-* Java 23
+* Java 25
 
 Download and extract or clone the repository to work with the `trino-packages`
 directory locally on your machine.
@@ -74,9 +77,18 @@ configurations files from `src/main/resources` and a limited number of plugins
 configured in `src/main/provisio/trino-custom.xml`, and repackages it into a new
 tarball package.
 
+As of Trino 477, the `trino-server-core` tarball and the individual plugin
+zips are no longer published to Maven Central. The script
+`src/main/script/prefetch.sh` runs in the Maven `validate` phase, parses the
+active `<artifact>` entries from `src/main/provisio/trino-custom.xml`,
+downloads the matching files from the corresponding
+[Trino GitHub release](https://github.com/trinodb/trino/releases), and
+installs them into the local Maven repository so that provisio can resolve
+them by GAV during the `package` phase.
+
 After a successful build, you find the tarball in the
 `trino-packages/trino-server-custom/target` directory with the name
-`trino-server-custom-472.tar.gz`. The specific version depends on the property
+`trino-server-custom-481.tar.gz`. The specific version depends on the property
 `dep.trino.version` configured in `trino-packages/trino-server-custom/pom.xml`.
 
 ## Installation
@@ -84,24 +96,31 @@ After a successful build, you find the tarball in the
 Build the project on any machine, and copy the tarball package from the
 `trino-server-custom/target` directory to the server on which you want to
 install Trino. The server must meet the Trino requirements for the specific
-Trino version, for example Java 23 for Trino 472.
+Trino version, for example Java 25 for Trino 481.
 
 Find details in the [Trino documentation](https://trino.io/docs/current/installation/deployment.html)
 
 Extract the  `tar.gz` package to install Trino:
 
 ```shell
-tar xfvz trino-server-custom-472.tar.gz
+tar xfvz trino-server-custom-481.tar.gz
 ```
 
 You can run Trino from the resulting directory for testing:
 
 ```shell
-cd trino-server-custom-472
+cd trino-server-custom-481
 ./bin/launcher run
 ```
 
 Stop the server by interrupting the script with `CTRL-C`.
+
+Startup takes a few minutes while plugins load. The server is ready when
+`var/log/server.log` contains the banner line:
+
+```
+INFO	main	io.trino.server.Server	======== SERVER STARTED ========
+```
 
 Use the launcher script also for [running in the background and other
 operations](https://trino.io/docs/current/installation/deployment.html#running-trino).
@@ -136,12 +155,16 @@ other Trino documentation for more details.
 
 ## Updating to other Trino version
 
-The project is configured to build a custom tarball for Trino 472. Updates to
+The project is configured to build a custom tarball for Trino 481. Updates to
 newer versions can be contributed to the repository or can be done locally. The
 following steps are necessary:
 
-* Update the property `dep.trino.version` in 
+* Update the property `dep.trino.version` in
   `trino-packages/trino-server-custom/pom.xml` to the desired Trino version.
+* Confirm that the matching `trino-server-core-<version>.tar.gz` and the
+  selected plugin zips are present on the corresponding
+  [Trino GitHub release page](https://github.com/trinodb/trino/releases).
 * If necessary, adjust the included configuration files in `src/main/resources`.
-* Add any newly available plugins in 
+* Add any newly available plugins as `<artifactSet>` entries in
+  `src/main/provisio/trino-custom.xml`.
 * Update the documentation in this `README.md` file.
