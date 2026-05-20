@@ -9,7 +9,7 @@ Builds the Trino Docker image
 
 -h       Display help
 -a       Build the specified comma-separated architectures, defaults to amd64,arm64,ppc64le
--r       Trino version, defaults to 475
+-r       Trino version, defaults to 481
 -t       Image tag name, defaults to trino-custom
 EOF
 }
@@ -17,7 +17,7 @@ EOF
 ARCHITECTURES=(amd64 arm64 ppc64le)
 # Set the desires Trino version. This version is also used automatically in the
 # Dockerfile.
-TRINO_VERSION=475
+TRINO_VERSION=481
 TAG_PREFIX=trino-custom
 
 while getopts ":a:r:t:h" o; do
@@ -83,7 +83,7 @@ function downloadPlugin() {
 }
 
 # Download any Trino plugin from Maven Central.
-# Specify the group path (groupId translated to a path), artifactid, version, 
+# Specify the group path (groupId translated to a path), artifactid, version,
 # and name for the desired folder in the plugin directory.
 function downloadGavPlugin() {
     groupPath=$1
@@ -102,22 +102,42 @@ function downloadTrinoPlugin() {
     downloadGavPlugin 'io/trino' ${artifactid} ${version} ${folder}
 }
 
+# Download a core Trino plugin zip from the Trino GitHub release. Plugin zips
+# are no longer published to Maven Central as of Trino 477, so this is the
+# default source for current versions.
+# Specify artifactid, version, and name for the desired folder in the plugin directory.
+function downloadGithubTrinoPlugin() {
+    artifactid=$1
+    version=$2
+    folder=$3
+    filename="${artifactid}-${version}.zip"
+    url="https://github.com/trinodb/trino/releases/download/${version}/${filename}"
+    downloadUrlPlugin ${url} ${folder}
+}
+
 # Download the desired Trino plugins.
-# Use the functions above as desired to download plugins from Maven Central
-# or other URLs.
+# Use the functions above as desired to download plugins from the Trino GitHub
+# release, a Maven repository, or any other URL.
 function processPluginsForCustomizations() {
     echo "Download plugins for customization"
-    downloadTrinoPlugin 'trino-ai-functions' ${TRINO_VERSION} 'ai-functions'
-    downloadTrinoPlugin 'trino-blackhole' ${TRINO_VERSION} 'blackhole'
-    downloadTrinoPlugin 'trino-faker' ${TRINO_VERSION} 'faker'
-    downloadTrinoPlugin 'trino-jmx' ${TRINO_VERSION} 'jmx'
-    downloadTrinoPlugin 'trino-memory' ${TRINO_VERSION} 'memory'
+    downloadGithubTrinoPlugin 'trino-ai-functions' ${TRINO_VERSION} 'ai-functions'
+    downloadGithubTrinoPlugin 'trino-blackhole' ${TRINO_VERSION} 'blackhole'
+    downloadGithubTrinoPlugin 'trino-faker' ${TRINO_VERSION} 'faker'
+    downloadGithubTrinoPlugin 'trino-jmx' ${TRINO_VERSION} 'jmx'
+    downloadGithubTrinoPlugin 'trino-memory' ${TRINO_VERSION} 'memory'
+    downloadGithubTrinoPlugin 'trino-tpcds' ${TRINO_VERSION} 'tpcds'
+    #downloadGithubTrinoPlugin 'trino-tpch' ${TRINO_VERSION} 'tpch'
+    # Equivalent to the preceding line as example for the downloadUrlPlugin function.
+    downloadUrlPlugin "https://github.com/trinodb/trino/releases/download/${TRINO_VERSION}/trino-tpch-${TRINO_VERSION}.zip" 'tpch'
+
+    # The downloadTrinoPlugin and downloadGavPlugin functions remain available
+    # for downloading plugin zips from a Maven repository, for example from a
+    # local Nexus or Artifactory mirror. Trino plugin zips are no longer
+    # published to Maven Central as of Trino 477, so the examples below would
+    # 404 against Central with current Trino versions. They are kept here for
+    # reference and for use when the artifacts are mirrored internally.
     #downloadTrinoPlugin 'trino-tpch' ${TRINO_VERSION} 'tpch'
-    # Equivalent to the preceding line as example for the downloadGavPlugin function
-    downloadGavPlugin 'io/trino' 'trino-tpch' ${TRINO_VERSION} 'tpch'
-    #downloadTrinoPlugin 'trino-tpcds' ${TRINO_VERSION} 'tpcds'
-    # Equivalent to the preceding line as example for the downloadUrlPlugin function
-    downloadUrlPlugin "https://repo1.maven.org/maven2/io/trino/trino-tpcds/${TRINO_VERSION}/trino-tpcds-${TRINO_VERSION}.zip" 'tpcds'
+    #downloadGavPlugin 'io/trino' 'trino-tpch' ${TRINO_VERSION} 'tpch'
 }
 
 echo "Clean up from prior builds"
