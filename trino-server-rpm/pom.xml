@@ -14,15 +14,15 @@
     <url>https://trino.io</url>
 
     <properties>
-        <project.build.targetJdk>23</project.build.targetJdk>
-        <air.java.version>23.0.0</air.java.version>
+        <project.build.targetJdk>25</project.build.targetJdk>
+        <air.java.version>25.0.1</air.java.version>
         <air.check.skip-spotbugs>true</air.check.skip-spotbugs>
         <air.check.skip-pmd>true</air.check.skip-pmd>
         <air.check.skip-jacoco>true</air.check.skip-jacoco>
         <air.check.skip-duplicate-finder>true</air.check.skip-duplicate-finder>
         <air.modernizer.java-version>8</air.modernizer.java-version>
 
-        <dep.trino.version>475</dep.trino.version>
+        <dep.trino.version>481</dep.trino.version>
         <server.tar.package>trino-server-${dep.trino.version}</server.tar.package>
         <rpm.skipSigning>true</rpm.skipSigning>
     </properties>
@@ -157,6 +157,32 @@
                         <goals>
                             <goal>testCompile</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Download trino-server tar.gz from the Trino GitHub release and
+                 install it into the local Maven repository so the provisio
+                 plugin can resolve it by GAV. Trino no longer publishes the
+                 server tarball to Maven Central as of Trino 477. -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>prefetch-trino-artifacts</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <phase>validate</phase>
+                        <configuration>
+                            <executable>${project.basedir}/src/main/script/prefetch.sh</executable>
+                            <arguments>
+                                <argument>${dep.trino.version}</argument>
+                                <argument>${project.basedir}</argument>
+                                <argument>${project.build.directory}</argument>
+                            </arguments>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

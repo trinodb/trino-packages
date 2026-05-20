@@ -75,8 +75,8 @@ public class ServerIT
             throws Exception
     {
         // Release names as in the https://api.adoptium.net/q/swagger-ui/#/Release%20Info/getReleaseNames
-        testInstall("jdk-23.0.2+7", "/usr/lib/jvm/temurin-23", "23");
-        testUninstall("jdk-23.0.2+7", "/usr/lib/jvm/temurin-23");
+        testInstall("jdk-25.0.2+10", "/usr/lib/jvm/temurin-25", "25");
+        testUninstall("jdk-25.0.2+10", "/usr/lib/jvm/temurin-25");
     }
 
     private void testInstall(String temurinReleaseName, String javaHome, String expectedJavaVersion)
@@ -353,7 +353,7 @@ public class ServerIT
         }
     }
 
-    record PathInfo(String path, Set<PosixFilePermission> permissions, String owner, String group, Optional<String> link) { }
+    record PathInfo(String path, Set<PosixFilePermission> permissions, String owner, String group, Optional<String> link) {}
 
     static class PathInfoAssert
             extends AbstractAssert<PathInfoAssert, PathInfo>
