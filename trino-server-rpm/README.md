@@ -21,14 +21,14 @@ The RPM archive contains the application, all plugins, the necessary default
 configuration files, default setups, and integration with the operating system
 to start as a service.
 
-The project is configured for Trino 475.
+The project is configured for Trino 481.
 
 ## Building
 
 The build requirements for the project are identical to Trino build requirements:
 
 * Linux or MacOS
-* Java 23
+* Java 25
 
 Download and extract or clone the repository to work with the `trino-packages`
 directory locally on your machine.
@@ -40,12 +40,20 @@ cd trino-packages
 ./mvnw clean install
 ```
 
-The project downloads the tarball of the configured Trino release, adds scripts
-and configurations, and repackages it into an RPM archive.
+The project downloads the full `trino-server` tarball of the configured Trino
+release, adds scripts and configurations, and repackages it into an RPM
+archive.
+
+As of Trino 477, the `trino-server` tarball is no longer published to Maven
+Central. The script `src/main/script/prefetch.sh` runs in the Maven `validate`
+phase, downloads `trino-server-<version>.tar.gz` from the corresponding
+[Trino GitHub release](https://github.com/trinodb/trino/releases), and
+installs it into the local Maven repository so that provisio can resolve it
+by GAV during the `package` phase.
 
 After a successful build, you find the RPM in the
 `trino-packages/trino-server-rpm/target` directory with the name
-`trino-server-rpm-470.noarch.rpm`. The specific version depends on the property
+`trino-server-rpm-481.noarch.rpm`. The specific version depends on the property
 `dep.trino.version` configured in `trino-packages/trino-server-rpm/pom.xml`.
 
 To run the integration tests in `ServerIT` you must activate the `ci` profile.
@@ -57,17 +65,22 @@ A local Docker installation is required:
 
 ## Updating to other Trino version
 
-The project is configured to build an RPM for Trino 470. Updates to newer
+The project is configured to build an RPM for Trino 481. Updates to newer
 versions can be contributed to the repository or can be done locally. The
 following steps are necessary:
 
-* Update the property `dep.trino.version` in 
+* Update the property `dep.trino.version` in
   `trino-packages/trino-server-rpm/pom.xml` to the desired Trino version.
+* Confirm that the matching `trino-server-<version>.tar.gz` is present on the
+  corresponding
+  [Trino GitHub release page](https://github.com/trinodb/trino/releases).
 * If necessary, adjust the Java version `project.build.targetJdk` and
-  `air.java.version` in `trino-packages/trino-server-rpm/pom.xml`.
+  `air.java.version` in `trino-packages/trino-server-rpm/pom.xml`, and the
+  Temurin release name in `ServerIT.testInstallUninstall`.
 * Update the `parent` in `trino-packages/pom.xml` to the same version used in
   the desired Trino version.
-* Check dependency and plugin versions `trino-packages/trino-server-rpm/pom.xml`.
+* Check dependency and plugin versions in
+  `trino-packages/trino-server-rpm/pom.xml`.
 * Adjust to any build failures.
 * Update the documentation in this `README.md` file.
 
