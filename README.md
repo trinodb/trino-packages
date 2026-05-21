@@ -38,6 +38,22 @@ and Docker compose.
 Find more [information about building and using the custom container image in
 the documentation](custom-docker/README.md).
 
+## Supported Trino versions
+
+The packages in this repository are built and released against specific Trino
+versions, available as [tags in this
+repository](https://github.com/trinodb/trino-packages/tags):
+
+* [481](https://github.com/trinodb/trino-packages/releases/tag/481)
+* [475](https://github.com/trinodb/trino-packages/releases/tag/475)
+* [474](https://github.com/trinodb/trino-packages/releases/tag/474)
+
+Other Trino versions can be used by updating the version references as
+documented in the README for each package: [RPM](trino-server-rpm/README.md),
+[custom tarball](trino-server-custom/README.md), and [custom container
+image](custom-docker/README.md). For best results, start from the nearest
+lower tagged version relative to the Trino version you want to use.
+
 ## Potential future additions
 
 The following other package ideas are suitable for implementation in this
