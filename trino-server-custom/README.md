@@ -91,6 +91,22 @@ After a successful build, you find the tarball in the
 `trino-server-custom-481.tar.gz`. The specific version depends on the property
 `dep.trino.version` configured in `trino-packages/trino-server-custom/pom.xml`.
 
+The Maven `ci` profile adds a smoke test that runs after the package phase.
+Invoke it locally with:
+
+```shell
+./mvnw -P ci verify
+```
+
+The smoke test is implemented as `src/main/script/smoke-test.sh` and wired
+into the `integration-test` phase via `exec-maven-plugin`. It extracts the
+built tarball into `target/smoke-test`, starts Trino in daemon mode, polls
+`http://localhost:8080/v1/info` until the node reports `state=ACTIVE`, then
+stops the server. On timeout the script dumps `launcher.log` and the tail
+of `server.log` so the failure mode is visible. The same job runs in the
+GitHub Actions `build` workflow on every push and pull request. The smoke
+test requires Java 25 on `PATH` and a free TCP port 8080 on the host.
+
 ## Installation
 
 Build the project on any machine, and copy the tarball package from the
