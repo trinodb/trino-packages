@@ -26,9 +26,9 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Checkout source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Install required Java distribution
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: ${{ matrix.java-version }}
           distribution: 'temurin'
@@ -40,7 +40,7 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Checkout source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Build custom-docker image
         # Restrict to amd64 to avoid QEMU emulation for arm64 and ppc64le on
         # ubuntu-latest runners. The Dockerfile is architecture-agnostic, so a
