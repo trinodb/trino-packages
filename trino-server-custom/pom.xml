@@ -140,4 +140,39 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>ci</id>
+            <build>
+                <plugins>
+                    <!-- Extract the built tarball, start Trino, wait for the
+                         server to report state=ACTIVE, then stop it. Catches
+                         regressions in the bundled configuration and plugins
+                         that only surface at server startup. -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>smoke-test</id>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <phase>integration-test</phase>
+                                <configuration>
+                                    <executable>${project.basedir}/src/main/script/smoke-test.sh</executable>
+                                    <arguments>
+                                        <argument>${project.build.directory}/${project.artifactId}-${dep.trino.version}.tar.gz</argument>
+                                        <argument>${dep.trino.version}</argument>
+                                        <argument>${project.build.directory}</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
