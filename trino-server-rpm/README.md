@@ -21,7 +21,7 @@ The RPM archive contains the application, all plugins, the necessary default
 configuration files, default setups, and integration with the operating system
 to start as a service.
 
-The project is configured for Trino 481.
+The project is configured for Trino 482.
 
 ## Building
 
@@ -53,7 +53,7 @@ by GAV during the `package` phase.
 
 After a successful build, you find the RPM in the
 `trino-packages/trino-server-rpm/target` directory with the name
-`trino-server-rpm-481.noarch.rpm`. The specific version depends on the property
+`trino-server-rpm-482.noarch.rpm`. The specific version depends on the property
 `dep.trino.version` configured in `trino-packages/trino-server-rpm/pom.xml`.
 
 To run the integration tests in `ServerIT` you must activate the `ci` profile.
@@ -65,7 +65,7 @@ A local Docker installation is required:
 
 ## Updating to other Trino version
 
-The project is configured to build an RPM for Trino 481. Updates to newer
+The project is configured to build an RPM for Trino 482. Updates to newer
 versions can be contributed to the repository or can be done locally. The
 following steps are necessary:
 
