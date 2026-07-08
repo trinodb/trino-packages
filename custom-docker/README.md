@@ -44,7 +44,7 @@ limited subset of plugins to create a image with the following characteristics:
 * `geospatial` functions plugin removed.
 * `exchange-filesystem` plugin removed.
 
-The project is configured for Trino 481.
+The project is configured for Trino 482.
 
 Plugin zips are fetched from the
 [Trino GitHub release](https://github.com/trinodb/trino/releases) by the
@@ -81,9 +81,9 @@ processor architectures locally with `docker images`:
 
 ```
 REPOSITORY     TAG           IMAGE ID       CREATED              SIZE
-trino-custom   481-ppc64le   2279b0a14cb6   About a minute ago   790MB
-trino-custom   481-arm64     67a3dcee3c85   About a minute ago   765MB
-trino-custom   481-amd64     df994bb44819   About a minute ago   757MB
+trino-custom   482-ppc64le   2279b0a14cb6   About a minute ago   790MB
+trino-custom   482-arm64     67a3dcee3c85   About a minute ago   765MB
+trino-custom   482-amd64     df994bb44819   About a minute ago   757MB
 ```
 
 The specific version depends on the parameter `TRINO_VERSION` set in `build.sh`.
@@ -100,7 +100,7 @@ purposes. The Trino node functions both as a coordinator and a worker. To launch
 it, execute the following:
 
 ```shell
-docker run -p 8080:8080 --name trino-custom  trino-custom:481-arm64
+docker run -p 8080:8080 --name trino-custom  trino-custom:482-arm64
 ```
 
 Wait for the following message log line:
@@ -163,7 +163,7 @@ other Trino documentation for more details.
 
 ## Updating to other Trino version
 
-The project is configured to build a custom image for Trino 481. Updates to
+The project is configured to build a custom image for Trino 482. Updates to
 newer versions can be contributed to the repository or can be done locally. The
 following steps are necessary:
 
