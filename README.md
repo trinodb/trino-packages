@@ -55,6 +55,9 @@ documented in the README for each package: [RPM](trino-server-rpm/README.md),
 image](custom-docker/README.md). For best results, start from the nearest
 lower tagged version relative to the Trino version you want to use.
 
+An AI assistant skill that automates these version updates is available as the
+[trino-packages-update skill](https://github.com/simpligility/getting-stuff-done/tree/main/skills/trino-packages-update).
+
 ## Potential future additions
 
 The following other package ideas are suitable for implementation in this
