@@ -76,12 +76,11 @@ release, adds configurations files from `customization` and a limited number of
 plugins configured in `processPluginsForCustomizations` in `build.sh`, and
 repackages it into a Docker image.
 
-After a successful build, you find the Docker images for the three different
+After a successful build, you find the Docker images for the two different
 processor architectures locally with `docker images`:
 
 ```
 REPOSITORY     TAG           IMAGE ID       CREATED              SIZE
-trino-custom   483-ppc64le   2279b0a14cb6   About a minute ago   790MB
 trino-custom   483-arm64     67a3dcee3c85   About a minute ago   765MB
 trino-custom   483-amd64     df994bb44819   About a minute ago   757MB
 ```
