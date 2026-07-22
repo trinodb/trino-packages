@@ -8,13 +8,13 @@ Usage: $0 [-h] [-a <ARCHITECTURES>] [-r <TRINO_VERSION>] [-t <TAG_PREFIX>]
 Builds the Trino Docker image
 
 -h       Display help
--a       Build the specified comma-separated architectures, defaults to amd64,arm64,ppc64le
+-a       Build the specified comma-separated architectures, defaults to amd64,arm64
 -r       Trino version, defaults to 483
 -t       Image tag name, defaults to trino-custom
 EOF
 }
 
-ARCHITECTURES=(amd64 arm64 ppc64le)
+ARCHITECTURES=(amd64 arm64)
 # Set the desires Trino version. This version is also used automatically in the
 # Dockerfile.
 TRINO_VERSION=483

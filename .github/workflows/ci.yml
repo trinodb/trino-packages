@@ -42,9 +42,8 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v6
       - name: Build custom-docker image
-        # Restrict to amd64 to avoid QEMU emulation for arm64 and ppc64le on
-        # ubuntu-latest runners. The Dockerfile is architecture-agnostic, so a
-        # single-arch build is enough to verify the bundled customization and
-        # plugin downloads.
+        # Restrict to amd64 to avoid QEMU emulation for arm64 on ubuntu-latest
+        # runners. The Dockerfile is architecture-agnostic, so a single-arch
+        # build is enough to verify the bundled customization and plugin downloads.
         run: ./build.sh -a amd64
         working-directory: custom-docker
