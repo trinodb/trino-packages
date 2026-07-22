@@ -22,7 +22,7 @@
         <air.check.skip-duplicate-finder>true</air.check.skip-duplicate-finder>
         <air.modernizer.java-version>8</air.modernizer.java-version>
 
-        <dep.trino.version>482</dep.trino.version>
+        <dep.trino.version>483</dep.trino.version>
         <server.tar.package>trino-server-${dep.trino.version}</server.tar.package>
         <rpm.skipSigning>true</rpm.skipSigning>
     </properties>
@@ -31,7 +31,7 @@
         <dependency>
             <groupId>com.github.docker-java</groupId>
             <artifactId>docker-java-api</artifactId>
-            <version>3.5.0</version>
+            <version>3.7.1</version>
             <scope>test</scope>
         </dependency>
 
@@ -111,7 +111,7 @@
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>testcontainers</artifactId>
-            <version>1.20.6</version>
+            <version>2.0.5</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
