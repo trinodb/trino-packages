@@ -44,6 +44,7 @@ The packages in this repository are built and released against specific Trino
 versions, available as [tags in this
 repository](https://github.com/trinodb/trino-packages/tags):
 
+* [483](https://github.com/trinodb/trino-packages/releases/tag/483)
 * [482](https://github.com/trinodb/trino-packages/releases/tag/482)
 * [481](https://github.com/trinodb/trino-packages/releases/tag/481)
 * [475](https://github.com/trinodb/trino-packages/releases/tag/475)
