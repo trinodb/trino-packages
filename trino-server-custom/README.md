@@ -52,7 +52,7 @@ characteristics:
 * `ml` functions plugin from `trino-server-core` removed.
 * `geospatial` functions plugin from `trino-server-core` removed.
 
-The project is configured for Trino 482.
+The project is configured for Trino 483.
 
 ## Building
 
@@ -88,7 +88,7 @@ them by GAV during the `package` phase.
 
 After a successful build, you find the tarball in the
 `trino-packages/trino-server-custom/target` directory with the name
-`trino-server-custom-482.tar.gz`. The specific version depends on the property
+`trino-server-custom-483.tar.gz`. The specific version depends on the property
 `dep.trino.version` configured in `trino-packages/trino-server-custom/pom.xml`.
 
 The Maven `ci` profile adds a smoke test that runs after the package phase.
@@ -112,20 +112,20 @@ test requires Java 25 on `PATH` and a free TCP port 8080 on the host.
 Build the project on any machine, and copy the tarball package from the
 `trino-server-custom/target` directory to the server on which you want to
 install Trino. The server must meet the Trino requirements for the specific
-Trino version, for example Java 25 for Trino 482.
+Trino version, for example Java 25 for Trino 483.
 
 Find details in the [Trino documentation](https://trino.io/docs/current/installation/deployment.html)
 
 Extract the  `tar.gz` package to install Trino:
 
 ```shell
-tar xfvz trino-server-custom-482.tar.gz
+tar xfvz trino-server-custom-483.tar.gz
 ```
 
 You can run Trino from the resulting directory for testing:
 
 ```shell
-cd trino-server-custom-482
+cd trino-server-custom-483
 ./bin/launcher run
 ```
 
@@ -171,7 +171,7 @@ other Trino documentation for more details.
 
 ## Updating to other Trino version
 
-The project is configured to build a custom tarball for Trino 482. Updates to
+The project is configured to build a custom tarball for Trino 483. Updates to
 newer versions can be contributed to the repository or can be done locally. The
 following steps are necessary:
 

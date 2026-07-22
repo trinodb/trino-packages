@@ -14,7 +14,7 @@
 # runs do not re-download the ~300 MB core tarball.
 #
 # Arguments:
-#   $1  Trino version (for example 482)
+#   $1  Trino version (for example 483)
 #   $2  Project basedir (the trino-server-custom module directory)
 #   $3  Work directory for caching downloads (typically ${project.build.directory})
 
