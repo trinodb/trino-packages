@@ -1,6 +1,6 @@
 <runtime>
     <!-- Target -->
-    <archive name="${project.artifactId}-${dep.trino.version}.tar.gz" hardLinkIncludes="**/*.jar" />
+    <archive name="${project.artifactId}-${dep.trino.version}.tar.gz" streaming="true" gzipCompressionLevel="6" hardLinkIncludes="**/*.jar" />
 
     <!-- Add any files found in source main resources to the root of the tarball
          You can modify the current files, add further configuration files and 
