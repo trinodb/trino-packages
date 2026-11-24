@@ -1,5 +1,5 @@
 # Set default to invalid version to ensure override in build.sh
-ARG TRINO_VERSION=483
+ARG TRINO_VERSION=484
 FROM trinodb/trino-core:${TRINO_VERSION}
 
 # Add customization
